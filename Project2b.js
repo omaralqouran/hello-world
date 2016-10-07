@@ -111,18 +111,22 @@ function setPremiumDueYear() {
 }
 
 function calculateTotalCost() {
-    const YOUNG_FEE = 20,
+    const MID_AGE = 30,
+        OLD_AGE_MIN = 45,
+        OLD_AGE_MAX = 120,
+        YOUNG_AGE_MIN = 15,
+        YOUNG_FEE = 20,
         MIDDLE_FEE = 10,
         ELDERLY_FEE = 30,
         BASE_PRICE = 100,
         FAULT_ACCIDENTS = 50;
-    if (customerAge > 15 && customerAge < 30){
+    if (customerAge > YOUNG_AGE_MIN && customerAge < MID_AGE){
         totalCost = YOUNG_FEE + BASE_PRICE + FAULT_ACCIDENTS * totalAccidents;
     }
-    else if (customerAge >= 30 && customerAge < 45) {
+    else if (customerAge >= MID_AGE && customerAge < OLD_AGE_MIN) {
         totalCost = MIDDLE_FEE + BASE_PRICE + FAULT_ACCIDENTS * totalAccidents;
     }
-    else if (customerAge >= 45 && customerAge < 60) {
+    else if (customerAge >= OLD_AGE_MIN && customerAge < OLD_AGE_MAX) {
         totalCost = ELDERLY_FEE + BASE_PRICE + FAULT_ACCIDENTS * totalAccidents;
     }
     else {
@@ -132,7 +136,8 @@ function calculateTotalCost() {
 
 function printTotalCost(){
     process.stdout.write('\x1Bc');
-    console.log(firstName + ' ' + lastName +  ' has a policy number of ' + policyNumber +' and your insurance bill will be $' + totalCost +' and your premium due date is due on ' + premiumDueDay +',' + premiumDueMonth +','+ premiumDueYear);
+    console.log(firstName + ' ' + lastName +  ' has a policy number of ' + policyNumber +' and your insurance bill will be $'
+        + totalCost +' and your premium due date is due on ' + premiumDueDay +',' + premiumDueMonth +','+ premiumDueYear);
 }
 
 function printGoodbye() {
